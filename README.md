@@ -1,121 +1,134 @@
-🛍️ Customer Shopping Behavior Analysis
+# 🛍️ Customer Shopping Behavior Analysis
 
-Data Cleaning • MySQL • Python • Power BI
+A data analytics project analyzing customer purchasing behaviors, spending patterns, and preferences across multiple product categories using Python, MySQL, and Power BI.
 
-📌 Project Overview
+---
 
-This project analyzes customer shopping behavior using a dataset containing 3,900 records across various product categories. The goal is to study customer demographics, spending patterns, item preferences, rating behavior, discount usage, and overall buying behaviour.
+## 📌 Project Overview
 
-The workflow includes:
+This project explores customer shopping trends using a dataset of **3,900 records** across various categories. The key objectives include studying:
 
-Data Cleaning using Python
+- Customer demographics  
+- Spending patterns  
+- Item preferences  
+- Rating behavior  
+- Discount usage  
+- Overall buying tendencies  
 
-Handling Missing Values (53 missing ratings)
+---
 
-Loading cleaned data into MySQL
+## ⚙️ Workflow
 
-Performing SQL Analysis
+1. **Data Cleaning** — Performed in Python  
+2. **Missing Value Handling** — 53 missing ratings handled category-wise  
+3. **Data Loading** — Cleaned dataset loaded into MySQL  
+4. **SQL Analysis** — Business-oriented queries for behavioral insights  
+5. **Visualization** — Interactive Power BI dashboard  
 
-Power BI Dashboard Visualization
+---
 
-📂 Dataset Summary
-Details	Information
-Total Rows	3,900
-Total Columns	18
-Missing Values	53 missing values in review_rating
-Processing Tools	Python, MySQL, Power BI
-🧹 Data Cleaning (Python)
-✔ Checked data structure
-df.info()
-df.describe()
+## 📂 Dataset Summary
 
-✔ Converted review_rating to numeric
-df['review_rating'] = pd.to_numeric(df['review_rating'], errors='coerce')
+| Details | Information |
+|----------|--------------|
+| Total Rows | 3,900 |
+| Total Columns | 18 |
+| Missing Values | 53 missing values in `review_rating` |
+| Processing Tools | Python, MySQL, Power BI |
 
-✔ Handled 53 missing values (category-wise median)
-df['review_rating'] = (
-    df.groupby('category')['review_rating']
-      .transform(lambda x: x.fillna(x.median()))
-)
+---
+## 🐍 Data Cleaning (Python)
 
-✔ Cleaned column names
+Data cleaning was completed using **Python (Pandas)** to ensure data quality before importing it into MySQL.
 
-Converted to snake_case and standardized categorical values.
+### Steps Performed
 
-✔ Loaded cleaned data into MySQL
-df.to_sql("customers", engine, if_exists="replace", index=False)
+1. **Checked data structure and summary**
 
-🛢️ SQL Analysis (MySQL)
-🔹 1. Top 5 Highest Rated Products
-SELECT item_purchased,
-       ROUND(AVG(review_rating), 2) AS Average_Product_Rating
-FROM customers
-GROUP BY item_purchased
-ORDER BY AVG(review_rating) DESC
-LIMIT 5;
+2. **Converted `review_rating` column to numeric**
 
-🔹 2. Revenue by Gender
-SELECT gender, SUM(purchase_amount) AS total_revenue
-FROM customers
-GROUP BY gender;
+3. **Handled missing values**
+- Found 53 missing values in `review_rating`.
+- Filled missing ratings using **category-wise median**.
 
-🔹 3. Subscriber vs Non-Subscriber Spending
-SELECT subscription_status,
-       ROUND(AVG(purchase_amount),2) AS avg_spend,
-       SUM(purchase_amount) AS total_revenue
-FROM customers
-GROUP BY subscription_status;
 
-🔹 4. Most Discount-Used Products
-SELECT item_purchased,
-       ROUND(AVG(discount_applied) * 100, 2) AS discount_usage_percentage
-FROM customers
-GROUP BY item_purchased
-ORDER BY discount_usage_percentage DESC
-LIMIT 5;
+4. **Standardized and cleaned column names**
+- Converted to `snake_case`
+- Cleaned inconsistent categorical values (like extra spaces, casing issues)
 
-🔹 5. Product Popularity by Category
-SELECT category, item_purchased, COUNT(*) AS sales_count
-FROM customers
-GROUP BY category, item_purchased
-ORDER BY category, sales_count DESC;
+5. **Loaded cleaned data into MySQL**
 
-📊 Power BI Dashboard
 
-The dashboard showcases:
+## 🛢️ SQL Analysis Using MySQL
 
-Revenue by gender and age group
+After loading the cleaned data, the following SQL queries were executed to derive business insights.
 
-Category-wise sales
+### 1. Top 5 Highest Rated Products
 
-Subscription vs Non-subscription performance
+### 2. Revenue by Gender
 
-Top-rated products
+### 3. Subscriber vs Non-Subscriber Spending
 
-Average spending by shipping type
+### 4. Most Discount-Used Products
 
-Discount usage patterns
+### 5. Product Popularity by Category
 
-Customer segmentation
+---
 
-Post-cleaning rating distribution
 
-💡 Key Insights
+---
 
-Subscribers spend more compared to non-subscribers.
+## 📊 Power BI Dashboard
 
-High-rated products can be promoted for better sales.
+**Dashboards Include:**
 
-Some items rely heavily on discounts — pricing can be optimized.
+- Revenue by gender and age group  
+- Category-wise sales performance  
+- Subscription vs non-subscription spending  
+- Top-rated products  
+- Average spending by shipping type  
+- Discount usage analysis  
+- Customer segmentation  
+- Post-cleaning rating distribution  
 
-Majority of customers fall in 19–35 and 36–60 age groups.
+---
 
-Express shipping users tend to spend more.
+## 💡 Key Insights
 
-🛠️ Tech Stack
-Tool	Use
-Python	Data Cleaning & Preprocessing
-Pandas / SQLAlchemy	ETL into MySQL
-MySQL	Data Analysis & Querying
-Power BI	Dashboard Visualization
-Jupyter Notebook	Exploratory Data Analysis
+- Subscribers spend more compared to non-subscribers.  
+- Highly rated products can be prioritized to drive sales.  
+- Certain products are heavily discount-dependent — optimize pricing strategy.  
+- Majority of customers belong to age groups **19–35** and **36–60**.  
+- Express shipping users show higher average spending.  
+
+---
+
+## ⚙️ Tools & Libraries
+
+| Tool | Purpose |
+|------|----------|
+| Python | Data cleaning and transformation |
+| Pandas | Data manipulation |
+| SQLAlchemy | Database connection and data export |
+| MySQL | Query execution and analysis |
+
+---
+
+## 📊 Summary
+
+- Cleaned dataset of 3,900 records and 18 columns.  
+- Missing values in review ratings filled using median per category.  
+- SQL queries used to find top-rated items, revenue segmentation, and discount trends.  
+- Prepared dataset is ready for dashboard creation in Power BI.
+
+---
+
+
+## ✨ Author
+
+**Hepzibah**  
+Data Analyst | Python | SQL | Power BI  
+📧hepzi2443@gmail.com
+
+
+
